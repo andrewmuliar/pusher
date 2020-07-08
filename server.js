@@ -53,14 +53,7 @@ app.post('/try', (req, res) => {
             "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1"
         }
     })
-    const s = { endpoint:
-        'https://fcm.googleapis.com/fcm/send/f8BKzJpW2SM:APA91bG7CS-UoOMuVRVg2_DgQOCLUPSR0G3Y2lCRrmCJKammabTddBbwoz4MwAz98T4alpUW-Z35J8e_Rx8r3F8WXw5TReTzkLZZyPIE56UNRWaQV32OAGQ4gvFUTdjNZ08Im-NaOQ_E',
-       expirationTime: null,
-       keys:
-        { p256dh:
-           'BPkdzyTTL8FzHEbfzmaTl-ZzXTHT6Uu9q85RavI-SiuFUEw0DKUFFQrcH9HDYDtAbPrR21YfVMKUVsdiNT2ri58',
-          auth: 'syp6sNVEme7Fd9H0j0oCYQ' } 
-    }
+    const s = {"endpoint":"https://fcm.googleapis.com/fcm/send/dZ56HeJB-Lg:APA91bFJ8nrvItPLSd_1S3fUPIYALAlh8twhbcyAL3a410ryTAZBljY8KXp78orgFnKJjSgS2aEmb6QaWSlWLAD9UOA-hW2CgIjxXhZpjbzgw6ObmtMgADWjDVceOztSEgC5GKD_zlh0","expirationTime":null,"keys":{"p256dh":"BHQDVy66SJ3z7nE73UkkIR8K31fsLZPBN8AUq1y40OfWNHkEcEpZqzowopJZWpVYPp7fV7ollxfYV529E1mQ1P0","auth":"pZAMPL1wKGiRJfI9lkC5vQ"}}
     Promise.resolve(webpush.sendNotification(s, payload)).then(
         () => {
             res.status(200).json({message:'Sended'})
