@@ -10,7 +10,7 @@ app.use(express.static('public'));
 // app.use(express.json())
 app.use(express.json({limit: '15mb'}));
 const server = http.createServer(app);
-var sub;
+var sub = [];
 app.get('/register', function (req, res) {
     res.sendFile(__dirname+'/public/register.html')
 });
@@ -20,7 +20,7 @@ app.get('/final', function (req, res) {
 });
 
 app.post('/push', (req, res) => {
-    sub = req.body;
+    sub.push(req.body);
     console.log(sub);
     res.set('Content-type', 'application/json');
     webpush.setVapidDetails(
@@ -46,7 +46,6 @@ app.post('/push', (req, res) => {
 })
 
 app.post('/try', (req, res) => {
-    res.set('Content-type', 'application/json');
     let payload = JSON.stringify({
         "notification":{
             "title":"GG",
@@ -54,8 +53,7 @@ app.post('/try', (req, res) => {
             "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1"
         }
     })
-    const s = {"endpoint":"https://fcm.googleapis.com/fcm/send/dZ56HeJB-Lg:APA91bFJ8nrvItPLSd_1S3fUPIYALAlh8twhbcyAL3a410ryTAZBljY8KXp78orgFnKJjSgS2aEmb6QaWSlWLAD9UOA-hW2CgIjxXhZpjbzgw6ObmtMgADWjDVceOztSEgC5GKD_zlh0","expirationTime":null,"keys":{"p256dh":"BHQDVy66SJ3z7nE73UkkIR8K31fsLZPBN8AUq1y40OfWNHkEcEpZqzowopJZWpVYPp7fV7ollxfYV529E1mQ1P0","auth":"pZAMPL1wKGiRJfI9lkC5vQ"}}
-    Promise.resolve(webpush.sendNotification(s, payload)).then(
+    Promise.resolve(webpush.sendNotification(sub[0], payload)).then(
         () => {
             res.status(200).json({message:'Sended'})
         })
