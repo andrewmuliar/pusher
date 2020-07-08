@@ -10,7 +10,7 @@ app.use(express.static('public'));
 // app.use(express.json())
 app.use(express.json({limit: '15mb'}));
 const server = http.createServer(app);
-let sub;
+var sub;
 app.get('/register', function (req, res) {
     res.sendFile(__dirname+'/public/register.html')
 });
@@ -35,15 +35,7 @@ app.post('/push', (req, res) => {
             "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1"
         }
     })
-    const s = { endpoint:
-        'https://fcm.googleapis.com/fcm/send/f8BKzJpW2SM:APA91bG7CS-UoOMuVRVg2_DgQOCLUPSR0G3Y2lCRrmCJKammabTddBbwoz4MwAz98T4alpUW-Z35J8e_Rx8r3F8WXw5TReTzkLZZyPIE56UNRWaQV32OAGQ4gvFUTdjNZ08Im-NaOQ_E',
-       expirationTime: null,
-       keys:
-        { p256dh:
-           'BPkdzyTTL8FzHEbfzmaTl-ZzXTHT6Uu9q85RavI-SiuFUEw0DKUFFQrcH9HDYDtAbPrR21YfVMKUVsdiNT2ri58',
-          auth: 'syp6sNVEme7Fd9H0j0oCYQ' } 
-    }
-    Promise.resolve(webpush.sendNotification(s, payload)).then(
+    Promise.resolve(webpush.sendNotification(sub, payload)).then(
         () => {
             res.status(200).json({message:'Sended'})
         })
@@ -61,7 +53,15 @@ app.post('/try', (req, res) => {
             "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1"
         }
     })
-    Promise.resolve(webpush.sendNotification(sub, payload)).then(
+    const s = { endpoint:
+        'https://fcm.googleapis.com/fcm/send/f8BKzJpW2SM:APA91bG7CS-UoOMuVRVg2_DgQOCLUPSR0G3Y2lCRrmCJKammabTddBbwoz4MwAz98T4alpUW-Z35J8e_Rx8r3F8WXw5TReTzkLZZyPIE56UNRWaQV32OAGQ4gvFUTdjNZ08Im-NaOQ_E',
+       expirationTime: null,
+       keys:
+        { p256dh:
+           'BPkdzyTTL8FzHEbfzmaTl-ZzXTHT6Uu9q85RavI-SiuFUEw0DKUFFQrcH9HDYDtAbPrR21YfVMKUVsdiNT2ri58',
+          auth: 'syp6sNVEme7Fd9H0j0oCYQ' } 
+    }
+    Promise.resolve(webpush.sendNotification(s, payload)).then(
         () => {
             res.status(200).json({message:'Sended'})
         })
