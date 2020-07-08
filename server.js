@@ -35,7 +35,7 @@ app.post('/push', (req, res) => {
             "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1"
         }
     })
-    Promise.resolve(webpush.sendNotification(sub, payload)).then(
+    Promise.resolve(webpush.sendNotification(sub[0], payload)).then(
         () => {
             res.status(200).json({message:'Sended'})
         })
