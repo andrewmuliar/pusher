@@ -50,7 +50,8 @@ app.post('/try', (req, res) => {
         "notification":{
             "title":"GG",
             "body":"Another not",
-            "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1"
+            "icon":"https://lh3.google.com/u/0/d/1-BTuNeBsKG85CjABETj5_JdBtI8YwhDp=w1920-h969-iv1",
+            "image":"https://wallpaperplay.com/walls/full/7/2/6/42463.jpg"
         }
     })
     Promise.resolve(webpush.sendNotification(sub[0], payload)).then(
