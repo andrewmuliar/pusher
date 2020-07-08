@@ -46,6 +46,7 @@ app.post('/push', (req, res) => {
 })
 
 app.post('/try', (req, res) => {
+    res.set('Content-type', 'application/json');
     let payload = JSON.stringify({
         "notification":{
             "title":"GG",
